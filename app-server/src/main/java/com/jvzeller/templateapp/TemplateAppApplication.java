@@ -1,4 +1,4 @@
-package com.javatemplateapp.templateapp;
+package com.jvzeller.templateapp;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
