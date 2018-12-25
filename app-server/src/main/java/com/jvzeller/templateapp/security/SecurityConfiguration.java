@@ -21,12 +21,16 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.csrf().disable().authorizeRequests()			
+		http.csrf().disable()
+			.headers().frameOptions().disable() 		// For H2 database console on browser
+			.and()
+			.authorizeRequests()
 			.antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
 			.antMatchers(HttpMethod.GET, "/").permitAll()
 			.antMatchers(HttpMethod.GET, "/static/**").permitAll()
 			.antMatchers(HttpMethod.POST, "/api/login").anonymous()
 			.antMatchers(HttpMethod.OPTIONS, prefix.concat("/**")).hasAnyRole("USER", "ADMIN")
+			.antMatchers("/h2/**").permitAll()
 			.anyRequest().authenticated()		
 			.and()
 			.addFilterBefore(new JWTAuthenticateFilter("/api/login", authenticationManager()), UsernamePasswordAuthenticationFilter.class)
