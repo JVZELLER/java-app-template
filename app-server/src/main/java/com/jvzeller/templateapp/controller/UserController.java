@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.jvzeller.templateapp.entity.User;
 
 @Controller
-@RequestMapping("${server.controller.prefix}user")
+@RequestMapping("${server.controller.prefix}/user")
 public class UserController extends AbstractController<User> {
 
 	public UserController () {
