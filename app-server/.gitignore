@@ -217,6 +217,7 @@ buildNumber.properties
 
 ### H2 Database ##
 *.mv.db
+*.trace.db
 
 
 # End of https://www.gitignore.io/api/java,maven,macos,eclipse,java-web,intellij
