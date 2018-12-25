@@ -215,5 +215,8 @@ buildNumber.properties
 .mvn/timing.properties
 .mvn/wrapper/maven-wrapper.jar
 
+### H2 Database ##
+*.mv.db
+
 
 # End of https://www.gitignore.io/api/java,maven,macos,eclipse,java-web,intellij
