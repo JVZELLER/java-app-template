@@ -9,24 +9,28 @@ import com.google.common.base.Strings;
 import com.jvzeller.templateapp.entity.DomainEntity;
 
 @Component
-public class Result < T extends DomainEntity > {
+public class Result < T extends DomainEntity > extends Response {
 
     private Boolean success;
-    private List < String > messages = new ArrayList <> ();
-    private List < T > resultList = new ArrayList <> ();
+    private List < String > messages = new ArrayList <>();
+    private List < T > resultList = new ArrayList <>();
 
     public Result () {
 	success = true;
     }
 
-    public void setSeuccess( String message ) {
+    public void addResult( T entity ) {
+	this.resultList.add( entity );
+    }
+
+    public void setSuccess( String message ) {
 	if ( !success ) {
 	    success = true;
-	    messages = new ArrayList <> ();
+	    messages = new ArrayList <>();
 	}
 
-	if ( !Strings.isNullOrEmpty ( message ) ) {
-	    messages.add ( message );
+	if ( !Strings.isNullOrEmpty( message ) ) {
+	    messages.add( message );
 	}
 
     }
@@ -34,16 +38,19 @@ public class Result < T extends DomainEntity > {
     public void setError( String message ) {
 	if ( success ) {
 	    success = false;
-	    messages = new ArrayList <> ();
+	    messages = new ArrayList <>();
 	}
-	
-	if ( !Strings.isNullOrEmpty ( message ) ) {
-	    messages.add ( message );
+
+	if ( !Strings.isNullOrEmpty( message ) ) {
+	    messages.add( message );
 	}
     }
 
+    public Boolean isSuccess () {
+	return this.success;
+    }
     public Boolean getSuccess() {
-	return success;
+	return this.success;
     }
 
     public void setSuccess( Boolean success ) {
