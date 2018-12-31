@@ -306,4 +306,7 @@ buildNumber.properties
 .mvn/timing.properties
 .mvn/wrapper/maven-wrapper.jar
 
+# NPM files (package-lock)
+package-lock.json
+
 # End of https://www.gitignore.io/api/java,node,macos,eclipse,netbeans,intellij,java-web,code-java
