@@ -2,10 +2,10 @@ package com.jvzeller.templateapp.util;
 
 public enum Action {
 
-    SAVE("SAVE"),
-    UPDATE("UPDATE"),
-    DELETE("DELETE"),
-    FIND("FIND");
+    SAVE("Save"),
+    UPDATE("Update"),
+    DELETE("Delete"),
+    FIND("Find");
 
     private String value;
 
