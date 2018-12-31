@@ -6,9 +6,12 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.jvzeller.templateapp.command.ICommand;
@@ -16,36 +19,94 @@ import com.jvzeller.templateapp.entity.DomainEntity;
 import com.jvzeller.templateapp.navigator.BusinessCase;
 import com.jvzeller.templateapp.navigator.BusinessCaseBuilder;
 import com.jvzeller.templateapp.navigator.Navigation;
-import com.jvzeller.templateapp.util.Actions;
+import com.jvzeller.templateapp.util.Action;
 import com.jvzeller.templateapp.util.Response;
 import com.jvzeller.templateapp.util.ResponseMessage;
 import com.jvzeller.templateapp.util.Result;
 
 public abstract class AbstractController < T extends DomainEntity > extends BaseController {
 
-    Result < T > result;
+    protected Result < T > result;
     protected Class < ? extends T > clazz;
-    @Autowired List < ICommand < T > > commands;
-    @Autowired private Map < String, Navigation < T > > navigatorList;
+    @Autowired
+    protected List < ICommand < T > > commands;
+    @Autowired
+    protected Map < String, Navigation < T > > navigatorList;
+    private final static String SPLITTER = "_";
 
     public AbstractController ( Class < ? extends T > clazz ) {
 	this.clazz = clazz;
     }
 
-    @RequestMapping ( method = RequestMethod.GET )
-    public @ResponseBody ResponseEntity < ? extends Response > doSome(@RequestBody T entity) {
+    @GetMapping
+    public @ResponseBody ResponseEntity < ? extends Response > find( @RequestBody T entity ) {
 	try {
-        	BusinessCase<T> bCase = new BusinessCaseBuilder<T>()
-        		.withName(existingNavigation("FIND_".concat(clazz.getSimpleName().toUpperCase())))
-        		.build();
-        	
-        	return new ResponseEntity<>(run(Actions.FIND.getValue()).execute(entity, bCase), HttpStatus.OK);
-	} catch (Exception e) {
+	    BusinessCase < T > bCase = new BusinessCaseBuilder < T >()
+		    .withName( existingNavigation(
+			    Action.FIND.getValue().concat( SPLITTER ).concat( clazz.getSimpleName().toUpperCase() ) ) )
+		    .build();
+
+	    return new ResponseEntity <>( run( Action.FIND.getValue() ).execute( entity, bCase ), HttpStatus.OK );
+	    
+	} catch ( Exception e ) {
 	    e.printStackTrace();
-	    return new ResponseEntity<ResponseMessage>(
-		    new ResponseMessage(true, "Erro ao Realizar operação!"), HttpStatus.INTERNAL_SERVER_ERROR);
+	    return new ResponseEntity < ResponseMessage >( new ResponseMessage( true, "Erro ao Realizar operação!" ),
+		    HttpStatus.INTERNAL_SERVER_ERROR );
 	}
-	
+
+    }
+
+    @PostMapping
+    public @ResponseBody ResponseEntity < ? extends Response > save( @RequestBody T entity ) {
+	try {
+	    BusinessCase < T > bCase = new BusinessCaseBuilder < T >()
+		    .withName( existingNavigation(
+			    Action.SAVE.getValue().concat( SPLITTER ).concat( clazz.getSimpleName().toUpperCase() ) ) )
+		    .build();
+
+	    return new ResponseEntity <>( run( Action.SAVE.getValue() ).execute( entity, bCase ), HttpStatus.OK );
+	    
+	} catch ( Exception e ) {
+	    e.printStackTrace();
+	    return new ResponseEntity < ResponseMessage >( new ResponseMessage( true, "Erro ao Realizar operação!" ),
+		    HttpStatus.INTERNAL_SERVER_ERROR );
+	}
+    }
+
+    @PutMapping
+    public @ResponseBody ResponseEntity < ? extends Response > update( @RequestBody T entity ) {
+	try {
+	    BusinessCase < T > bCase = new BusinessCaseBuilder < T >().withName( existingNavigation(
+		    Action.UPDATE.getValue().concat( SPLITTER ).concat( clazz.getSimpleName().toUpperCase() ) ) )
+		    .build();
+
+	    return new ResponseEntity <>( run( Action.UPDATE.getValue() ).execute( entity, bCase ), HttpStatus.OK );
+
+	} catch ( Exception e ) {
+	    e.printStackTrace();
+	    return new ResponseEntity < ResponseMessage >( new ResponseMessage( true, "Erro ao Realizar operação!" ),
+		    HttpStatus.INTERNAL_SERVER_ERROR );
+	}
+    }
+
+    @SuppressWarnings ( "unchecked" )
+    @DeleteMapping ( value = "{id}" )
+    public @ResponseBody ResponseEntity < ? extends Response > delete( @PathVariable Long id ) {
+	try {
+	    BusinessCase < T > bCase = new BusinessCaseBuilder < T >().withName( existingNavigation(
+		    Action.DELETE.getValue().concat( SPLITTER ).concat( clazz.getSimpleName().toUpperCase() ) ) )
+		    .build();
+	    
+	    T entity = (T) Class.forName( clazz.getName() ).newInstance();
+	    entity.setId( id );
+	    
+	    return new ResponseEntity <>( run( Action.DELETE.getValue() ).execute( entity, bCase ), HttpStatus.OK );
+	    
+	} catch ( Exception e ) {
+	    e.printStackTrace();
+	    return new ResponseEntity < ResponseMessage >( new ResponseMessage( true, "Erro ao Realizar operação!" ),
+		    HttpStatus.INTERNAL_SERVER_ERROR );
+	}
     }
 
     protected ICommand < T > run( String action ) {
