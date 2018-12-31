@@ -15,6 +15,7 @@ public abstract class Response {
 
     public Response () {
 	this.success = true;
+	this.error = false;
     }
     
     public Boolean isSuccess () {
