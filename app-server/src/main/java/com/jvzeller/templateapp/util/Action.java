@@ -1,15 +1,15 @@
 package com.jvzeller.templateapp.util;
 
-public enum Actions {
+public enum Action {
 
-    SAVE("Save"),
-    UPDATE("Update"),
-    DELETE("Delete"),
-    FIND("Find");
+    SAVE("SAVE"),
+    UPDATE("UPDATE"),
+    DELETE("DELETE"),
+    FIND("FIND");
 
     private String value;
 
-    private Actions ( String value ) {
+    private Action ( String value ) {
 	this.value = value;
     }
 
