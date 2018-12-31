@@ -11,13 +11,8 @@ import com.jvzeller.templateapp.entity.DomainEntity;
 @Component
 public class Result < T extends DomainEntity > extends Response {
 
-    private Boolean success;
     private List < String > messages = new ArrayList <>();
     private List < T > resultList = new ArrayList <>();
-
-    public Result () {
-	success = true;
-    }
 
     public void addResult( T entity ) {
 	this.resultList.add( entity );
@@ -44,17 +39,6 @@ public class Result < T extends DomainEntity > extends Response {
 	if ( !Strings.isNullOrEmpty( message ) ) {
 	    messages.add( message );
 	}
-    }
-
-    public Boolean isSuccess () {
-	return this.success;
-    }
-    public Boolean getSuccess() {
-	return this.success;
-    }
-
-    public void setSuccess( Boolean success ) {
-	this.success = success;
     }
 
     public List < String > getMessages() {
