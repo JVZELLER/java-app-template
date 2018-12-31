@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -38,12 +38,12 @@ public abstract class AbstractController < T extends DomainEntity > extends Base
 	this.clazz = clazz;
     }
 
-    @GetMapping
+    @PatchMapping
     public @ResponseBody ResponseEntity < ? extends Response > find( @RequestBody T entity ) {
 	try {
 	    BusinessCase < T > bCase = new BusinessCaseBuilder < T >()
 		    .withName( existingNavigation(
-			    Action.FIND.getValue().concat( SPLITTER ).concat( clazz.getSimpleName().toUpperCase() ) ) )
+			    Action.FIND.getValue().concat( SPLITTER ).concat( clazz.getSimpleName() ).toUpperCase() ) )
 		    .build();
 
 	    return new ResponseEntity <>( run( Action.FIND.getValue() ).execute( entity, bCase ), HttpStatus.OK );
