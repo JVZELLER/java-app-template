@@ -219,5 +219,7 @@ buildNumber.properties
 *.mv.db
 *.trace.db
 
+# NPM files (package-lock)
+package-lock.json
 
 # End of https://www.gitignore.io/api/java,maven,macos,eclipse,java-web,intellij
