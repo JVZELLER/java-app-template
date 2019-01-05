@@ -8,7 +8,7 @@
 	<packaging>pom</packaging>
 	<name>app</name>
 	<version>0.0.1-SNAPSHOT</version>
-	<url>https://github.com/jvzeller/java-template-app</url>
+	<url>https://github.com/jvzeller/java-app-template</url>
 
   <parent>
 		<groupId>org.springframework.boot</groupId>
@@ -18,7 +18,7 @@
 	</parent>
 
 	<modules>
-    	<module>app-client</module> <!-- fronend vue.js -->
+    	<module>app-client</module> <!-- frontend vue.js -->
 		<module>app-server</module> <!-- backend -->    
 	</modules>
 
