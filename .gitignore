@@ -294,6 +294,9 @@ typings/
 # Serverless directories
 .serverless
 
+# package-lock
+package-lock.json
+
 ### Maven ###
 target/
 pom.xml.tag
@@ -306,7 +309,11 @@ buildNumber.properties
 .mvn/timing.properties
 .mvn/wrapper/maven-wrapper.jar
 
-# NPM files (package-lock)
-package-lock.json
+### H2 Database ###
+data/
+
+### Generated Resources ###
+app-server/src/main/resources/public
+
 
 # End of https://www.gitignore.io/api/java,node,macos,eclipse,netbeans,intellij,java-web,code-java
