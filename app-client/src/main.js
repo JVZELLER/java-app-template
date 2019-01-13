@@ -5,7 +5,17 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 
+// Layouts
+import DefaultLayout from '@/views/MainLayout'
+import EmptyLayout from '@/views/EmptyLayout'
+
 Vue.config.productionTip = false
+
+// Global components
+// The components declared here 
+// are mainly views / layouts
+Vue.component('default-layout', DefaultLayout)
+Vue.component('empty-layout', EmptyLayout)
 
 new Vue({
   router,
