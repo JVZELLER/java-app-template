@@ -100,7 +100,9 @@
         </v-avatar>
       </v-btn>
     </v-toolbar>
-   <slot/>
+    <v-content>
+      <slot/>
+    </v-content>
   </v-container>
 </template>
 
