@@ -1,6 +1,6 @@
 <template>
   <v-layout align-center justify-center>
-    <v-flex xs12 sm8 md4>
+    <v-flex xs12>
       <v-timeline>
         <v-timeline-item
           v-for="n in 4"
