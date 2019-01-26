@@ -1,0 +1,2 @@
+# Java App Template
+A simple quick-start template for Java Web Application + Vue.Js
