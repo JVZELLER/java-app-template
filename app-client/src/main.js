@@ -4,18 +4,19 @@ import axios from 'axios'
 import App from './App.vue'
 import router from './router'
 import store from './store'
-
-// Layouts
-import DefaultLayout from '@/views/MainLayout'
-import EmptyLayout from '@/views/EmptyLayout'
+import CoreComponents from '@/core/components'
 
 Vue.config.productionTip = false
 
-// Global components
-// The components declared here 
-// are mainly views / layouts
-Vue.component('default-layout', DefaultLayout)
-Vue.component('empty-layout', EmptyLayout)
+Vue.use(CoreComponents)
+
+Vue.mixin({
+  methods: {},
+  data () {
+    return {
+    }
+  }
+})
 
 new Vue({
   router,
