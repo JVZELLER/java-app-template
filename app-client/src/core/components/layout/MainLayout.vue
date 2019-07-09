@@ -10,8 +10,12 @@
 
 <script>
   import NavigationDrawer from './navigation-drawer'
-  import toolbar from './toolbar'
+  import Toolbar from './toolbar'
   export default {
+    components: {
+      NavigationDrawer,
+      Toolbar
+    },
     data: () => ({
       items: [
         { icon: 'contacts', text: 'Contacts' },
@@ -45,9 +49,6 @@
         { icon: 'phonelink', text: 'App downloads' },
         { icon: 'keyboard', text: 'Go to the old version' }
       ]
-    }),
-    props: {
-      source: String
-    }
+    })
   }
 </script>
