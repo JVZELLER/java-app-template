@@ -1,12 +1,14 @@
 import Vue from 'vue'
-import './plugins/vuetify'
-import './plugins/vuetify'
-import axios from 'axios'
+import Axios from 'axios'
 import App from './App.vue'
-import router from './router'
-import store from './store'
 import CoreComponents from '@/core/components'
+import Listener from '@/listener'
 import i18n from './i18n'
+import router from '@/router'
+import store from '@/store'
+
+import './plugins/vuetify'
+import './plugins/vuetify'
 
 Vue.config.productionTip = false
 
@@ -16,6 +18,12 @@ Vue.mixin({
   methods: {},
   data () {
     return {
+      get Axios () {
+        return Axios
+      },
+      get Listener () {
+        return Listener
+      }
     }
   }
 })
