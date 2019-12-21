@@ -5,7 +5,6 @@ import CoreComponents from '@/core/components'
 import Listener from '@/listener'
 import i18n from './i18n'
 import router from '@/router'
-import store from '@/store'
 
 import './plugins/vuetify'
 import './plugins/vuetify'
@@ -30,7 +29,6 @@ Vue.mixin({
 
 new Vue({
   router,
-  store,
   i18n,
   render: h => h(App)
 }).$mount('#app')

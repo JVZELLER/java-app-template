@@ -8,6 +8,7 @@
       v-model="email"
       :rules="emailRules"
       label="E-mail"
+      lazy-validation
       required
     ></v-text-field>
   </v-form>

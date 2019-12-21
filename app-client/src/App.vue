@@ -9,11 +9,11 @@
 <script>  
   export default {
     data: () => ({
-      default: 'default'
+      defaultLayout: 'default-layout'
     }),
     computed: {
       layout () {
-        return this.$route.meta.layout || this.$store.getters.DEFAULT_LAYOUT
+        return this.$route.meta.layout || this.defaultLayout
       }
     }
   }

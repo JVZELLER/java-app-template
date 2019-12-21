@@ -25,10 +25,9 @@
           </component>
           <v-btn
             color="primary"
-            :disabled="$store.getters.FORM_VALIDATION"
             @click="nextStep(n)"
           >
-            Continue
+            {{ 'Button' }}
           </v-btn>
 
           <v-btn flat>Cancel</v-btn>
@@ -44,6 +43,10 @@
   import UserData from '@/components/UserData'
 
   export default {
+    components: {
+      PersonalData,
+      UserData
+    },
     data: () => ({
       step: 1,
       stepNumbers: 2,
@@ -61,10 +64,6 @@
       contentPage (currentStep) {
         return this.content[currentStep - 1]
       }
-    },
-    components: {
-      PersonalData,
-      UserData
     }
   }
 </script>

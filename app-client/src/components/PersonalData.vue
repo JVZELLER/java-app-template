@@ -10,6 +10,7 @@
       label="Nome"
       required
       @change="validate()"
+      lazy-validation
     ></v-text-field>
 
     <v-text-field
@@ -18,6 +19,7 @@
       label="Sobrenome"
       required
       @change="validate()"
+      lazy-validation
     ></v-text-field>
 
     <v-text-field
@@ -26,6 +28,7 @@
       label="E-mail"
       required
       @change="validate()"
+      lazy-validation
     ></v-text-field>
   </v-form>
 </template>
@@ -44,14 +47,10 @@
       ],
       checkbox: false
     }),
-    created () {
-      this.$store.dispatch('CHANGE_FORM_VALIDATION', true)
-    },
     methods: {
       validate () {
-        this.$store.dispatch('CHANGE_FORM_VALIDATION', !this.valid + !this.$refs.form.validate())
-        this.$refs.form.resetValidation()
-
+        // TODO:
+        // Validate fiedls for each tab
       }
     }
   }
