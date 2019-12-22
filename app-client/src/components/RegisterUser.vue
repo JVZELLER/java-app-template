@@ -3,31 +3,35 @@
     <v-flex xs12>
       <v-stepper v-model="step">
         <v-stepper-header>
-          <template v-for="n in stepNumbers">
+          <template v-for="n in steps">
             <v-stepper-step
               :complete="step > n"
               :key="`${n}-step`"
               :step="n"
-              editable
             >
               {{ stepTitles[n-1] }}
             </v-stepper-step>
+            <v-divider
+             v-if="n !== steps"
+             :key="n"
+           ></v-divider>
           </template>
         </v-stepper-header>
 
         <v-stepper-items>
           <v-stepper-content
-            v-for="n in stepNumbers"
+            v-for="n in steps"
             :key="`${n}-contentPage`"
             :step="n"
           >
-          <component :is="`${content[n-1]}`">
+          <component :is="`${content[n-1].name}`" @validate="validateContentPage(n, $event)">
           </component>
           <v-btn
             color="primary"
+            :disabled="content[n-1].invalid"
             @click="nextStep(n)"
           >
-            {{ 'Button' }}
+            {{ 'Next' }}
           </v-btn>
 
           <v-btn flat>Cancel</v-btn>
@@ -49,13 +53,13 @@
     },
     data: () => ({
       step: 1,
-      stepNumbers: 2,
+      steps: 2,
       stepTitles: ['Dados Pessoais', 'Dados de Usuário', 'Permissões'],
-      content: ['personal-data', 'user-data']
+      content: [{name: 'personal-data', invalid: true }, { name: 'user-data', invalid: true }]
     }),
     methods: {
       nextStep (currentStep) {
-        if (currentStep === this.stepNumbers) {
+        if (currentStep === this.steps) {
           this.step = 1
         } else {
           this.step += 1
@@ -63,6 +67,9 @@
       },
       contentPage (currentStep) {
         return this.content[currentStep - 1]
+      },
+      validateContentPage(pageNumber, state) {
+        this.content[pageNumber - 1].invalid = state
       }
     }
   }
