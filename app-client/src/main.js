@@ -7,9 +7,6 @@ import Listener from '@/listener'
 import i18n from './i18n'
 import router from '@/router'
 
-import './plugins/vuetify'
-import './plugins/vuetify'
-
 Vue.config.productionTip = false
 
 Vue.use(CoreComponents)
