@@ -18,8 +18,7 @@
 	</parent>
 
 	<modules>
-    	<module>app-client</module> <!-- frontend vue.js -->
-		<module>app-server</module> <!-- backend -->    
+		<module>app-server</module> <!-- backend -->
 	</modules>
 
 </project>
