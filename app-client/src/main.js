@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import './plugins/vuetify'
 import Axios from 'axios'
 import App from './App.vue'
 import CoreComponents from '@/core/components'
